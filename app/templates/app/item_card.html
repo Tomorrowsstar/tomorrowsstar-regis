@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-3">
+        <p>姓名</p>
+    </div>
+    <div class="col-9">
+        <p>{{ item.name }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <p>學校</p>
+    </div>
+    <div class="col-9">
+        <p>{{ item.get_school_display }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <p>性別</p>
+    </div>
+    <div class="col-9">
+        <p>{{ item.get_sex_display }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <p>備考</p>
+    </div>
+    <div class="col-9">
+        <p>{{ item.memo|linebreaksbr }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <p>登錄日期</p>
+    </div>
+    <div class="col-9">
+        <p>{{ item.created_at|date:"Y/m/d G:i:s" }}</p>
+    </div>
+</div>

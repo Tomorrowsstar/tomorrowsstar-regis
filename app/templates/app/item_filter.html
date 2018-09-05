@@ -1,0 +1,90 @@
+{% extends "./_base.html" %}
+{% block content %} 
+{% load crispy_forms_tags %}
+<div class="container">
+	<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">搜尋條件</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="關上">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form id="filter" method="get">
+					<div class="modal-body">
+						{{filter.form|crispy}}
+					</div>
+				</form>
+				<div class="modal-footer">
+					<a class="btn btn-outline-secondary" data-dismiss="modal">返回</a>
+					<button type="submit" class="btn btn-outline-secondary" form="filter">搜尋</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<a class="btn btn-secondary filtered" style="visibility:hidden" href="/?page=1">搜尋及解除</a>
+			<div class="float-right">
+				<a class="btn btn-outline-secondary" href="{% url 'create' %}">新建</a>
+				<a class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal" href="#">搜尋</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" >
+		<div class="col-12">
+			{% include "./_pagination.html" %}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-12">
+			<ul class="list-group">
+				{% for item in item_list %}
+				<li class="list-group-item">
+					<div class="row">
+						<div class="col-3">
+							<p>姓名</p>
+						</div>
+						<div class="col-9">
+							<p>{{ item.name }}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>登録日</p>
+						</div>
+						<div class="col-9">
+							<p>{{item.created_at|date:"Y/m/d G:i:s"}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="float-right">
+								<a class="btn btn-outline-secondary " href="{% url 'detail' item.pk %}">詳細</a>
+								<a class="btn btn-outline-secondary " href="{% url 'update' item.pk %}">修改</a>
+								<a class="btn btn-outline-secondary " href="{% url 'delete' item.pk %}">削除</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				{% empty %}
+				<li class="list-group-item">
+					找不到紀錄。
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div class="row" >
+		<div class="col-12">
+			<div class="float-right">
+				<a class="btn btn-outline-secondary" href="{% url 'create' %}">新登記</a>
+				<a class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal" href="#">查詢</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
